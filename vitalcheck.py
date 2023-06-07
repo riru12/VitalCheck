@@ -11,15 +11,14 @@ from sklearn.metrics import r2_score
 
 data = pd.read_csv('heart.csv')
 
-X = data.iloc[:,[1,2,3,4,5,6,7,8,9,10,11,12]].values                                                # independent variables
+
+X = data.iloc[:,[1,3,5,7,8,9,10,11,12]].values                                                      # independent variables
 y = data.iloc[:,13].values                                                                          # dependent variables
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=1)           # make a train and test split of the data
 
 regressor = LinearRegression()                                                                      # make a linear regression model
 regressor.fit(X_train, y_train)                                                                     # fit it to the training data
-
-# Write your code here, (5 points)
 
 y_pred = regressor.predict(X_test)
 
