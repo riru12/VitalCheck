@@ -32,117 +32,94 @@ function App() {
 
   const Sex = [
     {
-      label: 'Male',
-      value: 1
+      value: 'Male',
     },
     {
-      label: 'Female',
-      value: 0
+      value: 'Female',
     }
   ]
 
   const ExAng = [
     {
-      label: 'Yes',
-      value: 1
+      value: 'Yes',
     },
     {
-      label: 'No',
-      value: 0
+      value: 'No',
     }
   ]
 
   const FBS = [
     {
-      label: "greater than 120 mg/dl",
-      value: 1
+      value: "greater than 120 mg/dl",
     },
     {
-      label: 'less than or equal to 120 mg/dl',
-      value: 0
+      value: 'less than or equal to 120 mg/dl',
     }
   ]
 
 
   const ChestPain = [
     {
-      label: "Typical Angina",
-      value: 1
+      value: "Typical Angina",
     },
     {
-      label: "Atypical Angin",
-      value: 2
+      value: "Atypical Angin",
     },
     {
-      label: "Non-anginal Pain",
-      value: 3
+      value: "Non-anginal Pain",
     },
     {
-      label: "No Pain (Asymptomatic)",
-      value: 4
+      value: "No Pain (Asymptomatic)",
     }
   ]
   
   const Rest_ECG = [
     {
-      label: "Normal",
-      value: 0
+      value: "Normal",
     },
     {
-      label: "ST-T wave abnormality",
-      value: 1
+      value: "ST-T wave abnormality",
     },
     {
-      label: "Probable or Definite Left Ventricular Hypertrophy",
-      value: 2
+      value: "Probable or Definite Left Ventricular Hypertrophy",
     }
   ]
 
   const Slope = [
     {
-      label: "Upsloping",
-      value: 2
+      value: "Upsloping",
     },
     {
-      label: "Flat",
-      value: 1
+      value: "Flat",
     },
     {
-      label: "Downsloping",
-      value: 0
+      value: "Downsloping",
     }
   ]
   const CAA = [
     {
-      label: "0",
-      value: 0
+      value: "0",
     },
     {
-      label: "1",
-      value: 1
+      value: "1",
     },
     {
-      label: "2",
-      value: 2
+      value: "2",
     },
     {
-      label: "3",
-      value: 3
+      value: "3",
     }
   ]
 
   const Thal = [
     {
-      label: "Normal",
-      value: 2
+      value: "Normal",
     },
     {
-      label: "Fixed Defect",
-      value: 1
+      value: "Fixed Defect",
     },
     {
-      label: "Reversible Defect",
-      value: 3
+      value: "Reversible Defect",
     }
   ]
 
@@ -180,13 +157,13 @@ function App() {
 
                   {/* SEX TEXT BOX */}
                   <Grid xs={12} sm={6} item>
-                    <TextField select label="Sex" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Sex" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {Sex.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -194,13 +171,13 @@ function App() {
                   
                   {/* CHEST PAIN TEXTBOX */}
                   <Grid item xs={12}>
-                    <TextField select label="Type of Chest Pain" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Type of Chest Pain" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {ChestPain.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -224,13 +201,13 @@ function App() {
 
                   {/* FASTING BLOOD SUGAR TEXTBOX */}
                   <Grid item xs={12}>
-                    <TextField select label="Fasting Blood Sugar" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Fasting Blood Sugar" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {FBS.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -238,13 +215,13 @@ function App() {
 
                   {/* REST ECG TEXTBOX */}
                   <Grid item xs={12}>
-                    <TextField select label="Resting Electrocardiographic" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Resting Electrocardiographic" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {Rest_ECG.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -260,13 +237,13 @@ function App() {
 
                   {/* EXERCISE INDUCED ANGINA TEXTBOX */}
                   <Grid xs={12} sm={6} item>
-                    <TextField select label="Chest Pains after Exercise?" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Chest Pains after Exercise?" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {ExAng.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -282,13 +259,13 @@ function App() {
 
                   {/* SLOPE TEXTBOX */}
                   <Grid item xs={12}>
-                    <TextField select label="Slope (of the Peak Exercise ST Segment)" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Slope (of the Peak Exercise ST Segment)" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {Slope.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -296,13 +273,13 @@ function App() {
 
                   {/* CAA TEXTBOX */}
                   <Grid xs={12} sm={6} item>
-                    <TextField select label="Number of Major Vessels" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Number of Major Vessels" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {CAA.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
@@ -310,13 +287,13 @@ function App() {
 
                   {/* THAL TEXTBOX */}
                   <Grid xs={12} sm={6} item>
-                    <TextField select label="Thallium Stress Test" variant="outlined" helperText = "" fullWidth required 
+                    <TextField select label="Thallium Stress Test" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
                     }}
                     >
                       {Thal.map((option) => (
-                        <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        <MenuItem key={option.value} value={option.value}>
+                        {option.value}
                         </MenuItem>
                       ))}
                     </TextField> 
