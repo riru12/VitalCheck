@@ -1,5 +1,5 @@
 // Importing modules
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import "./App.css";
  
 import Box from '@mui/material/Box';
@@ -33,27 +33,33 @@ function App() {
   const Sex = [
     {
       value: 'Male',
+      parsed: 1
     },
     {
       value: 'Female',
+      parsed: 0
     }
   ]
 
   const ExAng = [
     {
       value: 'Yes',
+      parsed: 1
     },
     {
       value: 'No',
+      parsed: 0
     }
   ]
 
   const FBS = [
     {
       value: "greater than 120 mg/dl",
+      parsed: 1
     },
     {
       value: 'less than or equal to 120 mg/dl',
+      parsed: 0
     }
   ]
 
@@ -61,70 +67,101 @@ function App() {
   const ChestPain = [
     {
       value: "Typical Angina",
+      parsed: 1
     },
     {
       value: "Atypical Angin",
+      parsed: 2
     },
     {
       value: "Non-anginal Pain",
+      parsed: 3
     },
     {
       value: "No Pain (Asymptomatic)",
+      parsed: 4
     }
   ]
   
   const Rest_ECG = [
     {
       value: "Normal",
+      parsed: 0
     },
     {
       value: "ST-T wave abnormality",
+      parsed: 1
     },
     {
       value: "Probable or Definite Left Ventricular Hypertrophy",
+      parsed: 2
     }
   ]
 
   const Slope = [
     {
       value: "Upsloping",
+      parsed: 2
     },
     {
       value: "Flat",
+      parsed: 1
     },
     {
       value: "Downsloping",
+      parsed: 0
     }
   ]
   const CAA = [
     {
       value: "0",
+      parsed: 0
     },
     {
       value: "1",
+      parsed: 1
     },
     {
       value: "2",
+      parsed: 2
     },
     {
       value: "3",
+      parsed: 3
     }
   ]
 
   const Thal = [
     {
       value: "Normal",
+      parsed: 2
     },
     {
       value: "Fixed Defect",
+      parsed: 1
     },
     {
       value: "Reversible Defect",
+      parsed: 3
     }
   ]
 
   const buttonStyle = { mt:1, mb:1, bgcolor: '#7B1113', ":hover": {bgcolor: "#5A0C0E", color: 'white'} };
   const cardStyle =  { maxWidth: 450, padding: "10px 5px", margin: "0 auto" };
+
+  const [age, setAge] = useState(0);
+  const [sex, setSex] = useState(0);
+  const [cp, setCp] = useState(0);
+  const [trtbps, setTrtbps] = useState(0);
+  const [chol, setChol] = useState(0);
+  const [fbs, setFBS] = useState(0);
+  const [restecg, setRestecg] = useState(0);
+  const [thalachh, setThalachh] = useState(0);
+  const [oldpeak, setOldPeak] = useState(0);
+  const [slp, setSlp] = useState(0);
+  const [caa, setCaa] = useState(0);
+  const [thall, setThall] = useState(0);
+  const [exng, setExng] = useState(0);
 
   return (
     <div className="App">
@@ -151,6 +188,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField label="Age" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      setAge(parseInt(event.target.value));
                     }}
                     />
                   </Grid>
@@ -159,6 +198,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField select label="Sex" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      Sex.map((option) => (option.value === event.target.value ? setSex(option.parsed):""))
                     }}
                     >
                       {Sex.map((option) => (
@@ -173,6 +214,8 @@ function App() {
                   <Grid item xs={12}>
                     <TextField select label="Type of Chest Pain" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      ChestPain.map((option) => (option.value === event.target.value ? setCp(option.parsed):""))
                     }}
                     >
                       {ChestPain.map((option) => (
@@ -187,6 +230,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField label="Resting Blood Pressure (in mm Hg)" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      setTrtbps(parseInt(event.target.value));
                     }}
                     />
                   </Grid>
@@ -195,6 +240,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField label="Cholestoral (in mg/dl)" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      setChol(parseInt(event.target.value));
                     }}
                     />
                   </Grid>
@@ -203,6 +250,8 @@ function App() {
                   <Grid item xs={12}>
                     <TextField select label="Fasting Blood Sugar" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      FBS.map((option) => (option.value === event.target.value ? setFBS(option.parsed):""))
                     }}
                     >
                       {FBS.map((option) => (
@@ -217,6 +266,8 @@ function App() {
                   <Grid item xs={12}>
                     <TextField select label="Resting Electrocardiographic" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      Rest_ECG.map((option) => (option.value === event.target.value ? setRestecg(option.parsed):""))
                     }}
                     >
                       {Rest_ECG.map((option) => (
@@ -231,6 +282,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField label="Maximum Heart Rate" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      setThalachh(parseInt(event.target.value));
                     }}
                     />
                   </Grid>
@@ -239,6 +292,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField select label="Chest Pains after Exercise?" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      ExAng.map((option) => (option.value === event.target.value ? setExng(option.parsed):""))
                     }}
                     >
                       {ExAng.map((option) => (
@@ -253,6 +308,8 @@ function App() {
                   <Grid item xs={12}>
                     <TextField label="OldPeak (ST depression induced by exercise relative to rest?)" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      setOldPeak(parseInt(event.target.value));
                     }}
                     />
                   </Grid>
@@ -261,6 +318,8 @@ function App() {
                   <Grid item xs={12}>
                     <TextField select label="Slope (of the Peak Exercise ST Segment)" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      Slope.map((option) => (option.value === event.target.value ? setSlp(option.parsed):""))
                     }}
                     >
                       {Slope.map((option) => (
@@ -275,6 +334,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField select label="Number of Major Vessels" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      CAA.map((option) => (option.value === event.target.value ? setCaa(option.parsed):""))
                     }}
                     >
                       {CAA.map((option) => (
@@ -289,6 +350,8 @@ function App() {
                   <Grid xs={12} sm={6} item>
                     <TextField select label="Thallium Stress Test" defaultValue = "" variant="outlined" helperText = "" fullWidth required 
                     onChange={(event) => {
+                      event.preventDefault();
+                      Thal.map((option) => (option.value === event.target.value ? setThall(option.parsed):""))
                     }}
                     >
                       {Thal.map((option) => (
@@ -303,6 +366,8 @@ function App() {
                   <Grid item xs={12}>
                     <Button type="submit" variant="contained" sx={buttonStyle} fullWidth
                     onClick={e => {
+                      e.preventDefault()
+                      console.log(age, sex, cp, trtbps, chol, fbs, restecg, thalachh, exng, oldpeak, slp, caa, thall)
                     }}
                     >
                     Submit
