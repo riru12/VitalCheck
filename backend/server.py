@@ -1,14 +1,13 @@
-pip from flask import Flask
+from flask import Flask
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
-def predict():
-    x = 'test'
+@app.route('/<string:name>')
+def predict(name):
     return {
-        'value1':x
+        'value1':name
     }
  
      

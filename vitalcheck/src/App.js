@@ -19,7 +19,7 @@ function App() {
     const dataFetch = async () => {
       const data = await (
         await fetch(
-          "http://localhost:8000"
+          "http://localhost:8000/test"
         )
       ).json();
 
