@@ -65,5 +65,5 @@ vect = CountVectorizer()
 parameters = [[40,1,0,120,229,0,0,129,1,2.6,1,2,3]] #test parameters
 
 x = sc.transform(parameters)
-y = svc_model.predict(x)
+y = grid.predict(x)
 print(y)
