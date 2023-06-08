@@ -1,5 +1,5 @@
 // Importing modules
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import "./App.css";
  
 import Box from '@mui/material/Box';
@@ -10,24 +10,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import InstantMessage from './InstantMessage.js';
 
 import NavbarDefault from "./components/navbarDefault";
 
 
 function App() {
-    useEffect(() => {
-    const dataFetch = async () => {
-      const data = await (
-        await fetch(
-          `http://localhost:8000/test`
-        )
-      ).json();
-
-      console.log(data)
-    };
-
-    dataFetch();
-    }, []);
 
   const Sex = [
     {
@@ -65,19 +53,19 @@ function App() {
   const ChestPain = [
     {
       value: "Typical Angina",
-      parsed: 1
+      parsed: 0
     },
     {
       value: "Atypical Angin",
-      parsed: 2
+      parsed: 1
     },
     {
       value: "Non-anginal Pain",
-      parsed: 3
+      parsed: 2
     },
     {
       value: "No Pain (Asymptomatic)",
-      parsed: 4
+      parsed: 3
     }
   ]
   
@@ -161,6 +149,9 @@ function App() {
   const [caa, setCaa] = useState(0);
   const [thall, setThall] = useState(0);
   const [exng, setExng] = useState(0);
+  const [instant, setInstant] = useState(false); 
+  const [severity, setSeverity] = useState(''); 
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async () =>{
     const details = {
@@ -185,8 +176,25 @@ function App() {
         `http://localhost:8000/${detailsJSON}`
       )
     ).json();
-
+    console.log(details);
+    if(data.output === "1"){
+      setMessage("You are at high risk of heart attacks");
+      setSeverity("error")
+      setInstant(true);
+    }else{
+      setMessage("You are at low risk of heart attacks");
+      setSeverity("success")
+      setInstant(true);
+    }
+    
+    makeTimer();
     console.log(data);
+  }
+
+  const makeTimer = () => {
+    setInterval(() => {
+      setInstant(false)
+    }, 5000)
   }
 
   return (
@@ -198,6 +206,8 @@ function App() {
         <Grid sx={{ mt:5, mb:5 }}>
           <Card sx={{ boxShadow:5, mb:3 }} style={cardStyle}>
             <CardContent>
+
+              {instant ?  <InstantMessage sev = {severity} message = {message} /> : `` }
 
               <Typography align = "center" fontWeight="bold" component="h1" variant="h5">
                 HEART ATTACK RISK CHECKER
@@ -402,7 +412,7 @@ function App() {
 
                 </Grid>
               </form>
-
+              
             </CardContent>
           </Card>
         </Grid>
