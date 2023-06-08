@@ -1,34 +1,69 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
 
 data = pd.read_csv('heart.csv')
+data.head()
 
 
-X = data.iloc[:,[1,3,5,7,8,9,10,11,12]].values                                                      # independent variables
+data = data.dropna()
+
+X = data.iloc[:,[0,1,2,3,4,5,6,7,8,9,10,11,12]].values                                                # independent variables
 y = data.iloc[:,13].values                                                                          # dependent variables
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=1)           # make a train and test split of the data
+# SPLITTING THE DATA
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=202006914)  
 
-regressor = LinearRegression()                                                                      # make a linear regression model
-regressor.fit(X_train, y_train)                                                                     # fit it to the training data
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
 
-y_pred = regressor.predict(X_test)
+from sklearn.svm import SVC
 
-#sns.scatterplot(x=y_test, y = y_pred, ci=None, s=140)
-sns.scatterplot(x=y_test, y = y_pred,s=140)
-plt.xlabel('y_test data')
-plt.ylabel('Predictions')
+svc_model = SVC()
+svc_model.fit(X_train,y_train)
 
-print('MAE:', mean_absolute_error(y_test,y_pred))
-print("MSE",mean_squared_error(y_test,y_pred))
-print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred)))
-r2 = r2_score(y_test,y_pred)
-print(r2)
+predictions = svc_model.predict(X_test)
+# from sklearn.metrics import accuracy_score
+# accuracy_score(y_test, predictions)
+
+# from sklearn.metrics import classification_report,confusion_matrix
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+
+# mat = confusion_matrix(y_test,predictions)
+# sns.heatmap(mat, square = True, annot = True, cbar = False)
+# plt.xlabel('predicted value')
+# plt.ylabel('true value')
+# print(classification_report(y_test,predictions))
+
+from sklearn.model_selection import GridSearchCV
+
+# defining parameter range
+param_grid = {'C': [0.1, 1, 10, 100, 1000, 10000, 100000], 'gamma': [1, 0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005, 0.004, 0.003, 0.002, 0.001, 0.001, 0.00001, 0.000001]} 
+  
+grid = GridSearchCV(SVC(), param_grid, refit = True, verbose = 3)
+grid.fit(X_train,y_train)
+
+print(grid.best_estimator_)
+
+grid.best_params_
+grid_predictions = grid.predict(X_test)
+# accuracy_score(y_test, grid_predictions)
+
+# mat = confusion_matrix(y_test,grid_predictions)
+# sns.heatmap(mat, square = True, annot = True, cbar = False)
+# plt.xlabel('predicted value')
+# plt.ylabel('true value')
+
+# print(classification_report(y_test,grid_predictions))
+
+from sklearn.feature_extraction.text import CountVectorizer
+vect = CountVectorizer()
+
+parameters = [[40,1,0,120,229,0,0,129,1,2.6,1,2,3]] #test parameters
+
+x = sc.transform(parameters)
+y = svc_model.predict(x)
+print(y)
