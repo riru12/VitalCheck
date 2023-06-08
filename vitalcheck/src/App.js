@@ -150,6 +150,7 @@ function App() {
   const [thall, setThall] = useState(0);
   const [exng, setExng] = useState(0);
   const [instant, setInstant] = useState(false); 
+
   const [severity, setSeverity] = useState(''); 
   const [message, setMessage] = useState('');
 
@@ -186,15 +187,7 @@ function App() {
       setSeverity("success")
       setInstant(true);
     }
-    
-    makeTimer();
     console.log(data);
-  }
-
-  const makeTimer = () => {
-    setInterval(() => {
-      setInstant(false)
-    }, 5000)
   }
 
   return (
@@ -404,6 +397,7 @@ function App() {
                     onClick={e => {
                       e.preventDefault()
                       handleSubmit()
+                      setInstant(false)
                     }}
                     >
                     Submit
