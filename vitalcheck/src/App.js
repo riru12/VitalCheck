@@ -19,7 +19,7 @@ function App() {
     const dataFetch = async () => {
       const data = await (
         await fetch(
-          "http://localhost:8000/test"
+          `http://localhost:8000/test`
         )
       ).json();
 
@@ -28,7 +28,6 @@ function App() {
 
     dataFetch();
     }, []);
-
 
   const Sex = [
     {
@@ -62,7 +61,6 @@ function App() {
       parsed: 0
     }
   ]
-
 
   const ChestPain = [
     {
@@ -112,6 +110,7 @@ function App() {
       parsed: 0
     }
   ]
+
   const CAA = [
     {
       value: "0",
@@ -162,6 +161,33 @@ function App() {
   const [caa, setCaa] = useState(0);
   const [thall, setThall] = useState(0);
   const [exng, setExng] = useState(0);
+
+  const handleSubmit = async () =>{
+    const details = {
+      "age" : age,
+      "sex" : sex,
+      "cp" : cp,
+      "trtbps" : trtbps,
+      "chol" : chol,
+      "fbs" : fbs,
+      "restecg" : restecg,
+      "thalachh" : thalachh,
+      "oldpeak" : oldpeak,
+      "slp" : slp,
+      "caa" : caa,
+      "thall" : thall,
+      "exng" : exng
+    }
+    
+    const detailsJSON = JSON.stringify(details);
+    const data = await (
+      await fetch(
+        `http://localhost:8000/${detailsJSON}`
+      )
+    ).json();
+
+    console.log(data);
+  }
 
   return (
     <div className="App">
@@ -367,7 +393,7 @@ function App() {
                     <Button type="submit" variant="contained" sx={buttonStyle} fullWidth
                     onClick={e => {
                       e.preventDefault()
-                      console.log(age, sex, cp, trtbps, chol, fbs, restecg, thalachh, exng, oldpeak, slp, caa, thall)
+                      handleSubmit()
                     }}
                     >
                     Submit
